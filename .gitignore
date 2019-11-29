@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/visualstudiocode,python
-# Edit at https://www.gitignore.io/?templates=visualstudiocode,python
+*.xlsx
+db.json 
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
