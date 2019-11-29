@@ -1,5 +1,7 @@
 # encoding: utf-8
 import re
+import traceback
+import sys
 from common import retrieve_database, make_soup
 from tinydb import Query
 
@@ -15,18 +17,20 @@ def process():
         results = soup.find_all('tr', id=re.compile('tr_\d{8}'))
         try:
             for result in results:        
-                print result
-                #motorcycle = result.td
-                # rec = {
-                #     'category': category,
-                #     'category-url': url_base + result.a['href']
-                # }
+                motorcycle_image = result.find_all('td', class_='msga2')[1].a.img['src']
+                motorcycle_data = result.find_all('td', class_='pp6')
+                rec = {
+                    'model': motorcycle_data[0].string,
+                    'year': motorcycle_data[1].string,
+                    'motor': motorcycle_data[2].string,
+                    'price': motorcycle_data[3].string,
+                    'image-url': motorcycle_image
+                }
+                Result = Query()
+                entry_exists = table.search(Result.model == motorcycle_data[0].string and Result.year == motorcycle_data[1].string)
+                if not entry_exists:
+                    table.insert(rec)
 
-                # Result = Query()
-                # entry_exists = table.search(Result.category == category)
-
-                # if not entry_exists:
-                #     table.insert(rec)
-        except (AttributeError, KeyError) as ex:
-            print ex
+        except (AttributeError, KeyError):
+            traceback.print_exception(*sys.exc_info())
             pass
