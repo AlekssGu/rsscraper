@@ -5,8 +5,8 @@ import motorcycle
 def make_excel():
     db = retrieve_database()
     workbook = xlsxwriter.Workbook('data_export.xlsx')
-    worksheet = workbook.add_worksheet()
-
-    motorcycle.categories.fill_xls(db, worksheet)
+    
+    motorcycle.categories.fill_xls(db, workbook)
+    motorcycle.advertisments.fill_xls(db, workbook)
 
     workbook.close()

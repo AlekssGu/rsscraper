@@ -24,7 +24,8 @@ def process():
     except (AttributeError, KeyError):
         pass
 
-def fill_xls(db, worksheet):
+def fill_xls(db, workbook):
+    worksheet = workbook.add_worksheet()
     worksheet.name = 'Motorcycle categories'
     worksheet.set_column(0,0, 15) # category
     worksheet.set_column(1,1, 20) # category URL
