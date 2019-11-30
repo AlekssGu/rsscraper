@@ -10,7 +10,7 @@ def process():
     results = soup.find_all("h4", class_="category")
     try:
         for result in results:        
-            category = result.a.string.strip()
+            category = result.a.string.strip().encode('utf-8')
             rec = {
                 'category': category,
                 'category-url': url_base + result.a['href']
@@ -21,8 +21,7 @@ def process():
 
             if not entry_exists:
                 table.insert(rec)
-    except (AttributeError, KeyError) as ex:
-        print ex
+    except (AttributeError, KeyError):
         pass
 
 def fill_xls(db, worksheet):

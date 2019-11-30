@@ -1,17 +1,15 @@
 import common
-import categories
-import advertisments
-import spreadsheet
 import telegram
 import system_parameters
+from motorcycle import Motorcycle
+from export import spreadsheet
 
 def main():
     soup_process()
     spreadsheet.make_excel()
 
 def soup_process():  
-    categories.process()
-    advertisments.process()
+    Motorcycle.process()
 
 def notify_via_telegram():
     my_token = system_parameters.TELEGRAM_TOKEN
