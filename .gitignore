@@ -1,6 +1,7 @@
 
 *.xlsx
 db.json 
+system_parameters.py
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
