@@ -1,20 +1,20 @@
+import time
 import common
-import telegram
-import system_parameters
 from motorcycle import Motorcycle
+from real_estate import RealEstate
 from export import spreadsheet
 
 def main():
     soup_process()
     spreadsheet.make_excel()
 
+def process_todays_ads():
+    RealEstate.process_todays_ads()
+    Motorcycle.process_todays_ads()
+
 def soup_process():  
     Motorcycle.process()
 
-def notify_via_telegram():
-    my_token = system_parameters.TELEGRAM_TOKEN
-    chat_id = system_parameters.TELEGRAM_CHAT_ID
-    bot = telegram.Bot(token=my_token)
-    bot.sendMessage(chat_id=chat_id, text='Update')
-
-main()
+while True:
+    process_todays_ads()
+    time.sleep(300)
