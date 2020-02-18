@@ -8,5 +8,8 @@ Uses:
 How to run:
 * Install Python 2.7+ on your machine
 * Create Telegram bot with BotFather
-* Create `system_parameters.py` file with `TELEGRAM_CHAT_ID` and `TELEGRAM_TOKEN` keys
+* Create `system_parameters.py` file with following keys: 
+    * `TELEGRAM_CHAT_ID`
+    * `TELEGRAM_TOKEN`
+    * `DEFAULT_SLEEP_TIME_IN_SECONDS`
 * Run `python sscom.py`
