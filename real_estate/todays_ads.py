@@ -7,8 +7,8 @@ from common import retrieve_database, make_soup, notify_via_telegram, url_base
 from tinydb import Query
 
 def process():
-    todays_ads_url = 'https://www.ss.lv/lv/real-estate/homes-summer-residences/today/sell/'
-    soup = make_soup(todays_ads_url)
+    ads_url = 'https://www.ss.lv/lv/real-estate/homes-summer-residences/today/sell/'
+    soup = make_soup(ads_url)
 
     results = soup.find_all('tr', id=re.compile(r'tr_\d{8}'))
     try:
@@ -27,16 +27,16 @@ def create_record_if_new(main_data, motorcycle_image, description, url):
     db = retrieve_database()
     table = db.table('advertisments')
     
-    price = main_data[5].string
+    price = main_data[5].get_text()
     if main_data[5].string is None:
         price = main_data[5].b.string
 
     rec = {
-        'location': main_data[0].string.encode('utf-8'),
-        'area': main_data[1].string.encode('utf-8'),
-        'stories': main_data[2].string.encode('utf-8'),
-        'rooms': main_data[3].string.encode('utf-8'),
-        'land_area': main_data[4].string.encode('utf-8'),
+        'location': main_data[0].get_text().encode('utf-8'),
+        'area': main_data[1].get_text().encode('utf-8'),
+        'stories': main_data[2].get_text().encode('utf-8'),
+        'rooms': main_data[3].get_text().encode('utf-8'),
+        'land_area': main_data[4].get_text().encode('utf-8'),
         'price': price.translate(string.digits).encode('utf-8'),
         'image-url': motorcycle_image.encode('utf-8'),
         'description': description.encode('utf-8'),

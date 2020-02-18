@@ -1,20 +1,20 @@
 import time
-import common
+
+from export import spreadsheet
 from motorcycle import Motorcycle
 from real_estate import RealEstate
-from export import spreadsheet
+from system_parameters import DEFAULT_SLEEP_TIME_IN_SECONDS
 
-def main():
-    soup_process()
+
+def export():
     spreadsheet.make_excel()
 
-def process_todays_ads():
-    RealEstate.process_todays_ads()
-    Motorcycle.process_todays_ads()
 
-def soup_process():  
-    Motorcycle.process()
+def main():
+    RealEstate.process_ads_of_this_day()
+    Motorcycle.process_ads_of_this_day()
+
 
 while True:
-    process_todays_ads()
-    time.sleep(300)
+    main()
+    time.sleep(DEFAULT_SLEEP_TIME_IN_SECONDS)

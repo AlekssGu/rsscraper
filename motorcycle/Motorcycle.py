@@ -1,10 +1,5 @@
-import categories
-import advertisments
-import todays_ads
+from motorcycle import SSCom
 
-def process_todays_ads():
-    todays_ads.process()
 
-def process():
-    categories.process()
-    advertisments.process()
+def process_ads_of_this_day():
+    SSCom.process_todays_ads()
